@@ -1,0 +1,18 @@
+<div class="container text-center mt-5">
+    <div class="camera-container">
+        <!-- Webcam Component -->
+        <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
+            (initError)="handleInitError($event)">
+        </webcam>
+
+        <!-- Capture Button -->
+        <button class="btn btn-primary mt-3" (click)="triggerSnapshot()">Capture Image</button>
+    </div>
+
+    <!-- Display Captured Image -->
+    <div *ngIf="webcamImage" class="mt-4">
+        <h3>Captured Image:</h3>
+        <img [src]="webcamImage.imageAsDataUrl" alt="Captured image" class="img-fluid" />
+        <button class="btn btn-success mt-3" (click)="markAttendance()">Mark Attendance</button>
+    </div>
+</div>

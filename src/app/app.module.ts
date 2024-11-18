@@ -4,8 +4,9 @@ import { WebcamModule } from 'ngx-webcam';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { AttendanceComponent } from './attendence/attendence.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AttendanceComponent } from './attendance/attendance.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,8 +15,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    WebcamModule,
-    RouterModule, HttpClientModule,
+    WebcamModule, 
+    FormsModule,
+    RouterModule, 
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [

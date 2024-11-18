@@ -1,0 +1,45 @@
+<div class="container text-center mt-5">
+  <!-- Toggle Button for Registration / Attendance Mode -->
+  <button class="btn btn-info mb-4" (click)="toggleRegistration()">
+    {{ isRegistering ? 'Switch to Attendance' : 'Switch to Registration' }}
+  </button>
+
+  <!-- Webcam Component -->
+  <div class="camera-container">
+    <webcam [trigger]="triggerObservable" 
+            (imageCapture)="handleImage($event)" 
+            (initError)="handleInitError($event)">
+    </webcam>
+
+    <!-- Capture Button -->
+    <button class="btn btn-primary mt-3" [disabled]="capturedImages.length >= 3" 
+            (click)="triggerSnapshot()">Capture Image</button>
+  </div>
+
+  <!-- Student ID Input -->
+  <div class="mt-3">
+    <input type="text" [(ngModel)]="studentId" placeholder="Enter Student ID" class="form-control" />
+  </div>
+
+  <!-- Display Captured Images -->
+  <div *ngIf="capturedImages.length > 0" class="mt-4">
+    <h3>Captured Images:</h3>
+    <div class="row">
+      <div class="col-4" *ngFor="let image of capturedImages; let i = index">
+        <img [src]="image.imageAsDataUrl" alt="Captured image {{ i + 1 }}" class="img-fluid" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Buttons for Registration / Attendance -->
+  <div *ngIf="isRegistering">
+    <button class="btn btn-success mt-3" [disabled]="capturedImages.length === 0" (click)="registerFace()">
+      Register Face
+    </button>
+  </div>
+  <div *ngIf="!isRegistering">
+    <button class="btn btn-success mt-3" [disabled]="capturedImages.length === 0" (click)="markAttendance()">
+      Mark Attendance
+    </button>
+  </div>
+</div>
